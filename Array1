@@ -1,0 +1,204 @@
+Ques 1) : Largest Element in an Array (GFG):- 
+Ans :-
+int largest(vector<int> &arr) {
+        
+        int max = INT_MIN;
+        for(int i=0;i<arr.size();i++)
+        {
+            if(arr[i] > max)
+            max = arr[i];
+        }
+        
+        return max;
+        
+    }
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Ques 2: deletion in an Array(GFG) :-
+Ans:
+
+int main() {
+    int arr[] = {3, 1, 2, 5, 90};
+    int n = sizeof(arr) / sizeof(arr[0]);
+
+    // The element which we have to delete
+    int key = 2;
+
+    // Search key in array
+    for (int i = 0; i < n; i++) {
+
+        // If key is found in array
+        if (arr[i] == key) {
+          
+                // Reduce size of array and move all
+                // elements one space towards left
+                n = n - 1;
+                for (int j = i; j < n; j++)
+                    arr[j] = arr[j + 1];
+            break;
+        }
+    }
+
+    for (int i = 0; i < n; i++)
+        cout << arr[i] << " ";
+    return 0;
+}
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Ques 3: Insertion in Array(GFG):-
+Ans:
+int main() 
+{
+    int arr[] = {2,3,4,5};
+    int n = sizeof(arr)/sizeof(int);
+    
+    
+    int pos = 2;
+    
+    for(int i=n;i>pos;i--)
+    {
+      arr[i] = arr[i-1];
+    }
+    
+    arr[pos] = 7;
+    
+    for(int i=0;i<=n;i++)
+    cout<<arr[i]<<" ";
+    return 0;
+}
+---------------------------------------------------------------------------------------------------------------------------------------------------
+Ques 4: Second Largest Element in an Array(GFG) :-
+Ans:
+ int print2largest(vector<int> &arr) {
+        // Code Here
+        
+        int firstMax = INT_MIN;
+        for(int i=0;i<arr.size();i++)
+        {
+            if(arr[i]>firstMax)
+            firstMax = arr[i];
+        }
+        
+        int secondMax = -1;
+        for(int i=0;i<arr.size();i++)
+        {
+            if(firstMax!=arr[i] and arr[i]>secondMax)
+            secondMax = arr[i];
+            
+        }
+        return secondMax;
+    }
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+Ques 5: Two Sum(Leetcode) :-
+Ans:
+vector<int> twoSum(vector<int>& nums, int target) {
+        vector<int> v;
+        
+        for(int i=0; i<nums.size()-1; i++)
+        {
+            for(int j=i+1; j<nums.size(); j++)
+            {
+            if(nums[i]+nums[j] == target)
+            {
+            v.push_back(i);
+            v.push_back(j);
+            }
+            }
+        }
+        return v;
+        
+    }
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+Ques 6: Sort colors(Leetcode):-
+Ans:
+void sortColors(vector<int>& nums) {
+   //if return tyoe void and parameters in vector and any type you can changes only on that variable given by user
+
+    int zeroCount = 0;//for count : 0
+    int oneCount = 0;//for count : 1
+    int twoCount = 0;//for count : 2
+
+    int i = 0;
+    while(i < nums.size())
+    {
+        if(nums[i] == 0)
+        zeroCount++;
+        else if(nums[i] == 1)
+        oneCount++;
+        else if(nums[i] == 2)
+        twoCount++;
+
+        i++;
+    }
+    i = 0;
+
+    while(zeroCount != 0)
+    {
+    nums[i] = 0;
+    i++;
+    zeroCount--;
+    }
+
+    while(oneCount != 0)
+    {
+    nums[i] = 1;
+    i++;
+    oneCount--;
+    }
+
+    while(twoCount != 0)
+    {
+    nums[i] = 2;
+    i++;
+    twoCount--;
+    }
+
+    return ;
+    
+
+    
+
+    }
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+Ques 7: Single Element Among Doubles in array (GFG) :-
+Ans:
+int search(int n, int arr[]) {
+        // code
+        for(int i=0;i<n;i++)
+        {
+            int j;
+            for(j=0;j<n;j++)
+            {
+                if(arr[i] == arr[j] and i!=j)
+                break;
+            }
+            
+            if(j==n)
+            return arr[i];
+        }
+    }
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Ques 8: Leaders in an array (GFG) :-
+Ans:
+vector<int> leaders(vector<int>& arr) {
+        // Code here
+        int n = arr.size();
+        
+        vector<int> v;
+        for(int i=0;i<n-1;i++)
+        {
+            int j;
+            for(j=i+1;j<n;j++)
+            {
+                if(arr[i]<arr[j])
+                break;
+            }
+            
+            if(j==n)
+            {
+                v.push_back(arr[i]);
+            }
+        }
+        v.push_back(arr[n-1]);
+        
+        return v;
+    }
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
