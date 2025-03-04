@@ -1,0 +1,159 @@
+Ques 1) :- Segerate 0 and 1 in array (GFG):-
+Ans:
+ void segregate0and1(vector<int> &arr) {
+        // code here
+        int s = 0, e = arr.size()-1;
+        while(s < e)
+        {
+            if(arr[s] == 0)
+            s++;
+            else if(arr[s] == 1)
+            {
+                if(arr[e] == 0)
+                {
+                    swap(arr[s],arr[e]);
+                    s++;
+                    e--;
+                }
+                else
+                e--;
+            }
+        }
+    }
+******************************************************************************************************************************************************************
+Ques 2):- TwoSum -2 (Leetcode) :-
+Ans:
+vector<int> twoSum(vector<int>& numbers, int target) {
+
+        vector<int> v;
+
+        int start = 0, end = numbers.size()-1;
+
+        while(start < end)
+        {
+            if(numbers[start]+numbers[end] == target)
+            {
+                v.push_back(start+1);
+                v.push_back(end+1);
+                break;
+            }
+            else if(numbers[start]+numbers[end] > target)
+            {
+                end--;
+            }
+            else
+            start++;
+        }
+        return v;
+        
+    }
+***********************************************************************************************************************************************************
+Ques 3):- Rearrange elements in an array by sign (Leetcode) :-
+Ans:
+vector<int> rearrangeArray(vector<int>& nums) {
+        int n = nums.size();
+        vector<int> v(n,0);
+    int even_index = 0, odd_index = 1;
+        for(int i=0;i<nums.size();i++)
+        {
+            if(nums[i]>0)
+            {
+                v[even_index] = nums[i];
+                even_index += 2; 
+
+
+            }
+            else
+            {
+                v[odd_index] = nums[i];
+                odd_index += 2;
+            }
+        }
+        return v;
+    }
+*******************************************************************************************************************************************************************
+Ques 4) :- Product of array except itself (Leetcode) :-
+Ans:
+vector<int> productExceptSelf(vector<int>& nums) {
+        vector<int> ans;
+
+        
+        
+        for(int i=0;i<nums.size();i++)
+        {
+            int mul = 1;
+            for(int j=0;j<nums.size(); j++)
+            {
+                if(j != i)
+                mul *= nums[j];
+                
+
+            }
+            ans.push_back(mul);
+
+        }
+        return ans;
+
+        
+    }
+********************************************************************************************************************************************************
+Ques 5):- 3 Sum (Leetcode):-
+Ans:
+vector<vector<int>> threeSum(vector<int>& nums) {
+         int n = nums.size();
+      vector<vector<int>> ans;//2-D vector
+      
+      sort(nums.begin(), nums.end());//Sort the array
+
+      for(int i=0; i<n; i++)
+      {
+        
+        int start = i+1;
+        int end = n-1;
+        while(start < end)
+        {
+          int curr = nums[i]+nums[start]+nums[end];
+          if(curr == 0)//sum is equal to target(0)
+          {
+            ans.push_back({nums[i], nums[start], nums[end]});//push into 2D vector
+            while(start<end and nums[start]==nums[start+1])start++;//skip if any continuous duplicates
+            while(start<end and nums[end]==nums[end-1])end--;//skip if any continuous duplicates
+            start++;
+            end--;
+
+          }
+          else if(curr < 0)
+          start++;
+          else
+          end--;
+
+        }
+        
+        while(i+1<n and nums[i]==nums[i+1])i++;//skip if any continuous duplicates
+        
+
+      }
+      return ans;
+    }
+**************************************************************************************************************************************************************
+Ques 6):- Container with most water(Leetcode):-
+Ans:
+int maxArea(vector<int>& height) {
+         int maxi = 0;
+
+         int s = 0, e = height.size()-1;
+
+         while(s < e)
+         {
+            int w = e-s;
+            int h = min(height[s],height[e]);
+            int area = w*h;
+
+            maxi = max(maxi,area);
+
+            height[s]<height[e]?s++:e--;
+         }
+        return maxi;
+    }
+
+*************************************************************************************************************************************************
