@@ -71,4 +71,97 @@ void printSubarrays(int numbers[]) {
         }
     }
 *************************************************************************************************************************************************
-Ques 5) :- 
+Ques 5) :- Maximum prefix sum for a given range (GFG):-
+Ans:
+vector<int> maxPrefixes(vector<int>& arr, vector<int>& leftIndex,
+                            vector<int>& rightIndex) {
+        // code here.
+        vector<int> ans;
+        
+        for(int i=0;i<leftIndex.size();i++)
+        {
+            int max = INT_MIN;
+            
+            int prefix = 0;
+            for(int j=leftIndex[i]; j<=rightIndex[i];j++)
+            {
+                prefix += arr[j];
+                if(prefix > max)
+                max = prefix;
+            }
+            ans.push_back(max);
+        }
+        return ans;
+    }
+********************************************************************************************************************************************************************
+Ques 6) :- Find the Highest Altitude (Leetcode) :-
+ANs:
+int largestAltitude(vector<int>& gain) {
+
+        int max = 0;
+        int sum = 0;
+        for(int i=0;i<gain.size();i++)
+        {
+            sum += gain[i];
+            if(sum > max)
+            max= sum;
+
+        }
+        return max;
+        
+    }
+******************************************************************************************************************************************************************
+Ques 7):- Trapping Rain Water (Leetcode):-
+Ans:
+class Solution {
+public:
+    //------------------Optimize approach:- O(N) and O(1)--------------------------------------
+    int trap(vector<int>& height) {
+       
+        int max_wall_index = -1;//find the maximum height wall and store that index number
+        //so, left se iterate krte waqt rightmax ki chinta nhi krna and same vice-versa
+        int max = -1;
+        for(int i=0;i<height.size();i++)
+        {
+            if(height[i]>max)
+            {
+            max= height[i];
+            max_wall_index = i;
+
+            }
+        }
+        int water = 0;
+        int leftmax = -1;
+
+        for(int i=0;i<=max_wall_index;i++)
+        {
+            if(leftmax > height[i])
+            {
+                water += (leftmax-height[i]);
+            }
+            else
+            {
+                leftmax= height[i];
+            }
+        }
+        
+        int rightmax = -1;
+        for(int i=height.size()-1;i>max_wall_index;i--)
+        {
+            if(rightmax > height[i])
+            {
+                water += (rightmax-height[i]);
+            }
+            else
+            rightmax = height[i];
+        }
+        return water;
+
+
+
+
+
+        
+    }
+};
+ 
