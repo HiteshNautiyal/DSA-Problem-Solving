@@ -1,0 +1,162 @@
+Ques 1) :- 1752. Check if Array Is Sorted and Rotated (Leetcode) :-
+Ans:
+bool check(vector<int>& nums) {
+        int count=0; // for see how many pair exist...
+        
+        for(int i=1; i < nums.size() ; i++)
+        { 
+    // pair means like [3 ,4 , 5, 1, 2] => 3,4,5 and 5<1 , 1,2 in that one pair exist...        
+            if(nums[i-1] > nums[i])
+                count++;
+        }
+        
+        if(nums[nums.size()-1] > nums[0]) //if already sorted like [1, 2, 3] so 3>1 ...
+            count++;
+        
+        return count <= 1 ? true : false ; // if all numbers in array equal so pair 0 that is why count = 0 or count =1 so true exist...
+    }
+***************************************************************************************************************************************************************************
+Ques 2) :- 189. Rotate Array (Leetcode) :-
+Ans:
+ void rotate(vector<int>& nums, int k) {
+        
+        vector<int> temp(nums.size()); //we use another vector to store result becoz if we use same vector then after each rotation input array change so result also change ...
+        
+        for(int i=0;i<nums.size();i++)
+        {
+    // ..(i+k)%n..for when we loop end that is , n-1 , after [k=3] rotation , i.e , [ n-1+3 = n+2 ] but that is not exist so we modulus by 'n' then answer is '2' so last index after 3 roatation they exist in 2 index...
+            
+            temp[(i+k)% nums.size() ] = nums[i]; 
+        }
+        
+        nums = temp;   //copy temp vector into nums vector...
+        
+    }
+********************************************************************************************************************************************************************
+Ques 3) :- 242. Valid Anagram (Leetcode) :-
+Ans:
+bool isAnagram(string s, string t) {
+
+        long long int freq[26] = {0};
+        long long int freq1[26] = {0};
+        for(long long int i=0; i<s.size(); i++)
+        {
+            freq[s[i] - 'a']++;
+
+
+        }
+        for(long long int i=0; i<t.size(); i++)
+        {
+            freq1[t[i] - 'a']++;
+        }
+
+        for(long long int i=0; i<26; i++)
+        {
+            if(freq[i] != freq1[i])
+            return false;
+        }
+        return true;
+        
+    }
+******************************************************************************************************************************************************
+Ques 4) :- 409. Longest Palindrome (Leetcode) :-
+Ans:
+int longestPalindrome(string s) {
+        int n = s.length();
+        int lower[26] = {0};
+        int upper[26] = {0};
+
+        for(int i=0;i<n;i++)
+        {
+            if(s[i]>='a' and s[i]<='z')
+            {
+                lower[s[i]-'a']++;
+            }
+
+            if(s[i]>='A' and s[i]<='Z')
+            upper[s[i]-'A']++;
+        }
+        int count =0, odd = 0;
+        for(int i=0;i<26;i++)
+        {
+            if(lower[i]%2==0)
+            {
+                count += lower[i];
+            }
+            else
+            {
+                count += lower[i]-1;
+                odd=1;
+            }
+
+            if(upper[i]%2==0)
+            count += upper[i];
+            else
+            {
+                count += upper[i]-1;
+                odd=1;
+            }
+        }
+
+        return count+odd;
+        
+    }
+**************************************************************************************************************************************************************
+Ques 5) :- 2785. Sort Vowels in a String (Leetcode):-
+Ans:
+string sortVowels(string s) {
+        int n = s.length();
+        vector<int> lower(26,0);
+        vector<int> upper(26,0);
+
+        for(int i=0;i<n;i++)
+        {
+            if(s[i]=='a' or s[i]=='e' or s[i]=='i' or s[i]=='o' or s[i]=='u')
+            {
+                lower[s[i]-'a']++;
+                s[i] = '$';
+            }
+            else if(s[i]=='A' or s[i]=='E' or s[i]=='I' or s[i]=='O' or s[i]=='U')
+            {
+            upper[s[i]-'A']++;
+            s[i] = '$';
+
+            }
+        }
+
+        string vowel;
+
+        for(int i=0;i<26;i++)//this whole loop take O(N)..becoz...first loop is O(26) means constant time
+        {
+            char c = 'A'+i;
+            while(upper[i]--)
+            {
+                vowel += c;
+                
+            }
+        }
+        for(int i=0;i<26;i++)
+        {
+            char c = 'a'+i;
+            while(lower[i]--)
+            {
+                vowel += c;
+            }
+        }
+
+        int i = 0;//it iterate over original string
+        int j = 0;//it iterate over vowel string
+
+        while(j<vowel.size())
+        {
+            if(s[i]=='$')
+            {
+                s[i] = vowel[j];
+                j++;
+            }
+
+            i++;
+        }
+
+        return s;
+    }
