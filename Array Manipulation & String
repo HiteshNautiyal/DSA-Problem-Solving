@@ -160,3 +160,85 @@ string sortVowels(string s) {
 
         return s;
     }
+******************************************************************************************************************************************************************
+Ques 6) :- 415. Add Strings (Leetcode) :-
+Ans:
+class Solution {
+    string add(string num1, string num2)
+    {
+        string ans;
+        int i = num1.size()-1;
+        int j = num2.size()-1;
+        int carry = 0, sum =0;
+        while(j>=0)
+        {
+             sum = (num1[i]-'0')+(num2[j]-'0') + carry;
+
+            carry = sum/10;
+            // char c = '0' + sum%10;
+            ans += '0' + sum%10;
+            i--;
+            j--;
+
+            
+        }
+
+        while(i>=0)
+        {
+            sum = (num1[i]-'0')+ carry;
+
+            carry = sum/10;
+
+            // char c = '0' + (sum%10);
+            ans += '0' + sum%10;
+            i--;
+        }
+
+        if(carry==1)
+        {
+            
+            ans += '0'+carry;
+            
+        }
+        reverse(ans.begin(),ans.end());
+        return ans;
+    }
+public:
+    string addStrings(string num1, string num2) {
+        
+        if(num1.size() > num2.size())
+        return add(num1,num2);
+        else
+        return add(num2,num1);
+    }
+};
+*************************************************************************************************************************************************************
+Ques 7):- 3. Longest Substring Without Repeating Characters (Leetcode) :-
+Ans:
+//-------------Sliding window Approach------------------------
+int lengthOfLongestSubstring(string s) {
+        int maxLen = 0;
+
+        vector<bool> freq(256,0);
+        int n = s.length();
+        int first = 0, second = 0;
+
+        while(second < n)
+        {
+            while(freq[s[second]])
+            {
+                freq[s[first]] = 0;
+                first++;
+            }
+
+            freq[s[second]] = 1;
+            int currLen = second-first+1;
+
+            maxLen = max(currLen, maxLen);
+
+            second++;
+        }
+
+        return maxLen;
+        
+    }
